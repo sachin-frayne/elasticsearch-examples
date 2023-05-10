@@ -1,4 +1,8 @@
-# rescore and collapse field
+# rescoring after field collapse
+
+## description
+
+workaround to rescore our documents after we have used field collapse
 
 ```http
 ################################### clean up ###################################
@@ -41,7 +45,7 @@ PUT index/_doc/1
 }
 
 # search for the document and observe the rescore
-## note `_score` is not actuall needed in the sort object
+## note `_score` is not actually needed in the sort object
 
 GET index/_search
 {

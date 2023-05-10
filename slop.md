@@ -1,5 +1,8 @@
-
 # slop
+
+## description
+
+understand what slop actually does in a `match_phrase` query
 
 ```http
 ################################### clean up ###################################

@@ -1,5 +1,9 @@
 # field collapse
 
+## description
+
+deduplicate documents based on timestamp at search time rather than updating existing documents
+
 ```http
 ################################### clean up ###################################
 

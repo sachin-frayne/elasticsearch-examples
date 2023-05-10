@@ -1,5 +1,9 @@
 # synonyms
 
+## description
+
+a short example to set up an index with a synonym filter
+
 ```http
 ################################### clean up ###################################
 

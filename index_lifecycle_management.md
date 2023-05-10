@@ -1,5 +1,9 @@
 # index lifecycle management
 
+## description
+
+a short example to set up index lifecycle management
+
 ```http
 ################################### clean up ###################################
 

@@ -1,5 +1,9 @@
 # nested aggs vs denormalised
 
+## description
+
+convert a nested index to a denormalised index
+
 ```http
 ################################### clean up ###################################
 

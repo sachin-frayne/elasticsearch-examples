@@ -1,5 +1,9 @@
 # average time delta between events
 
+## description
+
+this query intends to approximate the time delta between different events ingested into elasticsearch
+
 ```http
 ################################### clean up ###################################
 
