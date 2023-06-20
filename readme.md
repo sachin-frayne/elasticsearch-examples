@@ -1,5 +1,5 @@
 # elasticsearch-examples
-a collection of elasticsearch examples I have built up over time
+a collection of elasticsearch examples
 
   * [array_contains_x_number_of_elements](array_contains_x_number_of_elements.md)
   * [average_time_delta_between_events](average_time_delta_between_events.md)
