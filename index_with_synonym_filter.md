@@ -7,13 +7,13 @@ a short example to set up an index with a synonym filter
 ```http
 ################################### clean up ###################################
 
-DELETE index
+DELETE /index
 
 ################################################################################
 
 # create an index with a synonym filter
 
-PUT index
+PUT /index
 {
   "settings": {
     "index": {
@@ -50,7 +50,7 @@ PUT index
 
 # test some text to see how our analyzer will work
 
-GET index/_analyze
+GET /index/_analyze
 {
   "analyzer": "synonym",
   "text": ["synonym"]
@@ -58,7 +58,7 @@ GET index/_analyze
 
 # test a query to see which terms will actually be used in the search
 
-GET index/_validate/query?rewrite=true
+GET /index/_validate/query?rewrite=true
 {
   "query": {
     "match": {

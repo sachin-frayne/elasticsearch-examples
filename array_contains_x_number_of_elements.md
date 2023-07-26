@@ -7,13 +7,13 @@ this query will allow the user to find documents based on the number of elements
 ```http
 ################################### clean up ###################################
 
-DELETE index
+DELETE /index
 
 ################################################################################
 
 # ingest some example documents to test with
 
-POST index/_bulk
+POST /index/_bulk
 {"index":{}}
 {"foo":1}
 {"index":{}}
@@ -21,7 +21,7 @@ POST index/_bulk
 
 # return documents where the array field called `foo` contains only 1 element
 
-GET index/_search
+GET /index/_search
 {
   "query": {
     "bool": {

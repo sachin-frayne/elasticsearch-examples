@@ -7,16 +7,16 @@ a short example to set up a rollup job
 ```http
 ################################### clean up ###################################
 
-DELETE _ingest/pipeline/ingest_timestamp
-DELETE _rollup/job/rollup_job
-DELETE index
-DELETE rolled_index
+DELETE /_ingest/pipeline/ingest_timestamp
+DELETE /_rollup/job/rollup_job
+DELETE /index
+DELETE /rolled_index
 
 ################################################################################
 
 # create a pipeline that will add a timestamp to our data
 
-PUT _ingest/pipeline/ingest_timestamp
+PUT /_ingest/pipeline/ingest_timestamp
 {
   "processors": [
     {
@@ -28,9 +28,10 @@ PUT _ingest/pipeline/ingest_timestamp
   ]
 }
 
-# define a mapping for our data to make sure our keyword field has the correct type
+# define a mapping for our data to make sure our keyword field has the correct 
+# type
 
-PUT index
+PUT /index
 {
   "mappings": {
     "properties": {
@@ -47,9 +48,10 @@ PUT index
   }
 }
 
-# index some documents into our data, run this request a few times several seconds apart
+# index some documents into our data, run this request a few times several 
+# seconds apart
 
-POST index/_bulk?pipeline=ingest_timestamp
+POST /index/_bulk?pipeline=ingest_timestamp
 {"index":{}}
 {"keyword":"off", "number": 0}
 {"index":{}}
@@ -57,7 +59,7 @@ POST index/_bulk?pipeline=ingest_timestamp
 
 # create the rollup job
 
-PUT _rollup/job/rollup_job
+PUT /_rollup/job/rollup_job
 {
   "index_pattern": "index",
   "rollup_index": "rolled_index",
@@ -86,11 +88,11 @@ PUT _rollup/job/rollup_job
 
 # start the roll job
 
-POST _rollup/job/rollup_job/_start
+POST /_rollup/job/rollup_job/_start
 
 # run an aggregation in the original index
 
-GET index/_search
+GET /index/_search
 {
   "size": 0,
   "aggs": {
@@ -116,9 +118,10 @@ GET index/_search
   }
 }
 
-# run the same aggregation to the rolled_index, against the `_rollup_search` API the results will be the same
+# run the same aggregation to the rolled_index, against the `_rollup_search` 
+# API the results will be the same
 
-GET rolled_index/_rollup_search
+GET /rolled_index/_rollup_search
 {
   "size": 0,
   "aggs": {

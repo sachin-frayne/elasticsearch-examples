@@ -7,19 +7,19 @@ switch from ilm to datastream with no downtime
 ```http
 ################################### clean up ###################################
 
-DELETE index-name-000001
-DELETE _ilm/policy/index_lifecycle_policy
-DELETE _ilm/policy/datastream_policy
-DELETE _data_stream/index-name-datastream
-DELETE _index_template/index
-DELETE _index_template/datastream
-DELETE _ingest/pipeline/ingest_timestamp
+DELETE /index-name-000001
+DELETE /_ilm/policy/index_lifecycle_policy
+DELETE /_ilm/policy/datastream_policy
+DELETE /_data_stream/index-name-datastream
+DELETE /_index_template/index
+DELETE /_index_template/datastream
+DELETE /_ingest/pipeline/ingest_timestamp
 
 ################################################################################
 
 # create a pipeline that will add a timestamp to our data
 
-PUT _ingest/pipeline/ingest_timestamp
+PUT /_ingest/pipeline/ingest_timestamp
 {
   "processors": [
     {
@@ -33,7 +33,7 @@ PUT _ingest/pipeline/ingest_timestamp
 
 # create ilm policy
 
-PUT _ilm/policy/index_lifecycle_policy
+PUT /_ilm/policy/index_lifecycle_policy
 {
   "policy": {
     "phases": {
@@ -50,7 +50,7 @@ PUT _ilm/policy/index_lifecycle_policy
 
 # create ilm index template
 
-PUT _index_template/index
+PUT /_index_template/index
 {
   "index_patterns": ["index-name-*"], 
   "template": {
@@ -64,7 +64,7 @@ PUT _index_template/index
 
 # bootstrap the ilm index
 
-PUT index-name-000001
+PUT /index-name-000001
 {
   "aliases": {
     "index-name":{
@@ -75,14 +75,14 @@ PUT index-name-000001
 
 # insert a document
 
-POST index-name/_doc?pipeline=ingest_timestamp
+POST /index-name/_doc?pipeline=ingest_timestamp
 {
   "foo": "bar"
 }
 
 # create datastream policy
 
-PUT _ilm/policy/datastream_policy
+PUT /_ilm/policy/datastream_policy
 {
   "policy": {
     "phases": {
@@ -99,7 +99,7 @@ PUT _ilm/policy/datastream_policy
 
 # create datastream index template
 
-PUT _index_template/datastream
+PUT /_index_template/datastream
 {
   "index_patterns": ["index-name-datastream*"],
   "data_stream": { },
@@ -114,11 +114,11 @@ PUT _index_template/datastream
 
 # create the datastream
 
-PUT _data_stream/index-name-datastream
+PUT /_data_stream/index-name-datastream
 
 # ingest a document into the datastream
 
-POST index-name-datastream/_doc?pipeline=ingest_timestamp
+POST /index-name-datastream/_doc?pipeline=ingest_timestamp
 {
   "foo": "baz"
 }
@@ -126,7 +126,7 @@ POST index-name-datastream/_doc?pipeline=ingest_timestamp
 # create a new alias that points to the datastream
 # the alias will also filter out documents with `"skip": true`
 
-POST _aliases
+POST /_aliases
 {
   "actions": [
     {
@@ -146,7 +146,7 @@ POST _aliases
 
 # reindex all the old docs into the data stream with field `"skip" = true`
 
-POST _reindex?wait_for_completion=false
+POST /_reindex?wait_for_completion=false
 {
   "source": {
     "index": "index-name"
@@ -162,12 +162,12 @@ POST _reindex?wait_for_completion=false
 
 # test to see only one copy of all the docs
 
-GET index-name*/_search
+GET /index-name*/_search
 
 # once all docs are reindexed we can delete old indices
 # and remove the alias filter in one atomic operation
 
-POST _aliases
+POST /_aliases
 {
   "actions": [
     {
@@ -192,5 +192,5 @@ POST _aliases
 
 # test again to see only one copy of all the docs
 
-GET index-name*/_search
+GET /index-name*/_search
 ```

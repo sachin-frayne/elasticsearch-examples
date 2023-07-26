@@ -7,15 +7,15 @@ deduplicate documents based on timestamp at search time rather than updating exi
 ```http
 ################################### clean up ###################################
 
-DELETE index-000001
-DELETE index-000002
-DELETE _ingest/pipeline/ingest_timestamp
+DELETE /index-000001
+DELETE /index-000002
+DELETE /_ingest/pipeline/ingest_timestamp
 
 ################################################################################
 
 # create a pipeline that will add a timestamp to our data
 
-PUT _ingest/pipeline/ingest_timestamp
+PUT /_ingest/pipeline/ingest_timestamp
 {
   "processors": [
     {
@@ -27,9 +27,10 @@ PUT _ingest/pipeline/ingest_timestamp
   ]
 }
 
-# create 2 mappings 1 for `index-000001` and 1 for `index-000002`, they will have the same settings
+# create 2 mappings 1 for `index-000001` and 1 for `index-000002`, 
+# they will have the same settings
 
-PUT index-000001
+PUT /index-000001
 {
   "aliases": {
     "index": {}
@@ -58,7 +59,7 @@ PUT index-000001
   }
 }
 
-PUT index-000002
+PUT /index-000002
 {
   "aliases": {
     "index": {}
@@ -89,7 +90,7 @@ PUT index-000002
 
 # create the document in `index-000001`
 
-POST index-000001/_doc?pipeline=ingest_timestamp
+POST /index-000001/_doc?pipeline=ingest_timestamp
 {
   "collapse_field": 1234,
   "field": "value",
@@ -98,7 +99,7 @@ POST index-000001/_doc?pipeline=ingest_timestamp
 
 # wait a little while and then index the update document to `index-000002`
 
-POST index-000002/_doc?pipeline=ingest_timestamp
+POST /index-000002/_doc?pipeline=ingest_timestamp
 {
   "collapse_field": 1234,
   "field": "updated_value",
@@ -107,7 +108,7 @@ POST index-000002/_doc?pipeline=ingest_timestamp
 
 # test search to see the update value only
 
-GET index*/_search
+GET /index*/_search
 {
   "query": {
     "match": {

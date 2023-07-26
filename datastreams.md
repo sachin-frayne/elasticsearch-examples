@@ -7,18 +7,18 @@ a short example to set up a datastream
 ```http
 ################################### clean up ###################################
 
-DELETE _data_stream/datastream
-DELETE _ilm/policy/datastream-policy
-DELETE _index_template/datastream-template
-DELETE _ingest/pipeline/ingest_timestamp
-PUT _cluster/settings
+DELETE /_data_stream/datastream
+DELETE /_ilm/policy/datastream-policy
+DELETE /_index_template/datastream-template
+DELETE /_ingest/pipeline/ingest_timestamp
+PUT /_cluster/settings
 {"transient":{"indices.lifecycle.poll_interval":null}}
 
 ################################################################################
 
 # create a pipeline that will add a timestamp to our data
 
-PUT _ingest/pipeline/ingest_timestamp
+PUT /_ingest/pipeline/ingest_timestamp
 {
   "processors": [
     {
@@ -32,7 +32,7 @@ PUT _ingest/pipeline/ingest_timestamp
 
 # create an ilm policy
 
-PUT _ilm/policy/datastream-policy
+PUT /_ilm/policy/datastream-policy
 {
   "policy": {
     "phases": {
@@ -55,7 +55,7 @@ PUT _ilm/policy/datastream-policy
 
 # create the data stream template
 
-PUT _index_template/datastream-template
+PUT /_index_template/datastream-template
 {
   "index_patterns": [
     "datastream"
@@ -70,20 +70,22 @@ PUT _index_template/datastream-template
 
 # ingest a document to initialise the data stream
 
-POST datastream/_doc?pipeline=ingest_timestamp
+POST /datastream/_doc?pipeline=ingest_timestamp
 {
   "foo":"bar"
 }
 
-# use the datastream as if it were an index for append and search only, no updates or deletes
+# use the datastream as if it were an index for append and search only, 
+# no updates or deletes
 
-GET datastream/_search
+GET /datastream/_search
 
 # see the backing indices for our data stream, .ds-datastream-*
 
-GET _cat/indices/.ds-datastream-*?v&h=index,docs.count
+GET /_cat/indices/.ds-datastream-*?v&h=index,docs.count
 
-# force the data stream to rollover to see the new backing index getting created
+# force the data stream to rollover to see the new backing index getting 
+# created
 
-POST datastream/_rollover
+POST /datastream/_rollover
 ```

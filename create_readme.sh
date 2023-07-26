@@ -7,6 +7,6 @@ for F in *.md
 do
     if [[  ! ${F} == "readme.md" ]]
     then
-    echo "  * [${F//.md}](${F})" >> readme.md
+        echo "  * [${F//.md}](${F})" >> readme.md
     fi
 done

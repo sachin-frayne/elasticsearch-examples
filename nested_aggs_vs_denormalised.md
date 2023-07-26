@@ -7,12 +7,12 @@ convert a nested index to a denormalised index
 ```http
 ################################### clean up ###################################
 
-DELETE index_nested
-DELETE index_denormalised
+DELETE /index_nested
+DELETE /index_denormalised
 
 ################################################################################
 
-PUT index_nested
+PUT /index_nested
 {
   "mappings": {
     "properties": {
@@ -34,7 +34,7 @@ PUT index_nested
   }
 }
 
-POST index_nested/_doc
+POST /index_nested/_doc
 {
   "parent_id": "1234",
   "childSkus": [
@@ -49,7 +49,7 @@ POST index_nested/_doc
   ]
 }
 
-POST index_nested/_doc
+POST /index_nested/_doc
 {
   "parent_id": "456",
   "childSkus": [
@@ -64,7 +64,7 @@ POST index_nested/_doc
   ]
 }
 
-GET index_nested/_search
+GET /index_nested/_search
 {
   "size": 0, 
   "aggs": {
@@ -91,7 +91,7 @@ GET index_nested/_search
   }
 }
 
-PUT index_denormalised
+PUT /index_denormalised
 {
   "mappings": {
     "properties": {
@@ -112,7 +112,7 @@ PUT index_denormalised
   }
 }
 
-POST index_denormalised/_doc
+POST /index_denormalised/_doc
 {
   "parent_id": "1234",
   "childSku": {
@@ -121,7 +121,7 @@ POST index_denormalised/_doc
   }
 }
 
-POST index_denormalised/_doc
+POST /index_denormalised/_doc
 {
   "parent_id": "1234",
   "childSku": {
@@ -130,7 +130,7 @@ POST index_denormalised/_doc
   }
 }
 
-POST index_denormalised/_doc
+POST /index_denormalised/_doc
 {
   "parent_id": "456",
   "childSku": {
@@ -139,7 +139,7 @@ POST index_denormalised/_doc
   }
 }
 
-POST index_denormalised/_doc
+POST /index_denormalised/_doc
 {
   "parent_id": "456",
   "childSku": {
@@ -148,7 +148,7 @@ POST index_denormalised/_doc
   }
 }
 
-GET index_denormalised/_search
+GET /index_denormalised/_search
 {
   "size": 0,
   "aggs": {

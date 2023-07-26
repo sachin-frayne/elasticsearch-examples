@@ -12,4 +12,5 @@ a collection of elasticsearch examples
   * [rescoring_after_field_collapse](rescoring_after_field_collapse.md)
   * [rollups](rollups.md)
   * [slop](slop.md)
+  * [text_vs_keyword](text_vs_keyword.md)
   * [update_by_query_multi_index](update_by_query_multi_index.md)

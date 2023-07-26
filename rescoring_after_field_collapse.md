@@ -7,12 +7,13 @@ workaround to rescore our documents after we have used field collapse
 ```http
 ################################### clean up ###################################
 
-DELETE index
+DELETE /index
 
 ################################################################################
+
 # create index mapping that satisfies collapse field requirments
 
-PUT index
+PUT /index
 {
   "mappings": {
     "properties": {
@@ -37,7 +38,7 @@ PUT index
 
 # index a document
 
-PUT index/_doc/1
+PUT /index/_doc/1
 {
   "field": "value",
   "@timestamp": "2023-03-30T15:15:53Z",
@@ -47,7 +48,7 @@ PUT index/_doc/1
 # search for the document and observe the rescore
 ## note `_score` is not actually needed in the sort object
 
-GET index/_search
+GET /index/_search
 {
   "query": {
     "match": {
