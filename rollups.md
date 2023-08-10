@@ -4,7 +4,7 @@
 
 a short example to set up a rollup job
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /_ingest/pipeline/ingest_timestamp

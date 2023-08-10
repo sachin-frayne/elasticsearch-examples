@@ -4,7 +4,7 @@
 
 convert a nested index to a denormalised index
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index_nested

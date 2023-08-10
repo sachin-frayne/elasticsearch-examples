@@ -4,7 +4,7 @@
 
 a short example to set up index lifecycle management
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index-000001

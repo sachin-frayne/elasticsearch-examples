@@ -4,7 +4,7 @@
 
 deduplicate documents based on timestamp at search time rather than updating existing documents
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index-000001

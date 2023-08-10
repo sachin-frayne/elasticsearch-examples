@@ -4,7 +4,7 @@
 
 update documents using only the alias with `_update_by_query`
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index-1

@@ -4,7 +4,7 @@
 
 switch from ilm to datastream with no downtime
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index-name-000001

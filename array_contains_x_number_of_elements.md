@@ -4,7 +4,7 @@
 
 this query will allow the user to find documents based on the number of elements in an array
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index

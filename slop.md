@@ -4,7 +4,7 @@
 
 understand what slop actually does in a `match_phrase` query
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index

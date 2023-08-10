@@ -4,7 +4,7 @@
 
 workaround to rescore our documents after we have used field collapse
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index

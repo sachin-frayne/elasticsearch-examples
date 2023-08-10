@@ -4,7 +4,7 @@
 
 a short example to set up a datastream
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /_data_stream/datastream

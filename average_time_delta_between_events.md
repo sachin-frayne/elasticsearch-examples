@@ -4,7 +4,7 @@
 
 this query intends to approximate the time delta between different events ingested into elasticsearch
 
-```http
+```eb
 ################################### clean up ###################################
 
 DELETE /index
